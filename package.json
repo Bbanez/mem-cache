@@ -1,0 +1,64 @@
+{
+  "name": "@banez/mem-store",
+  "version": "1.0.0",
+  "description": "In memory storage for NodeJS and Browser.",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "scripts": {
+    "build:ts": "tsc -p .",
+    "bundle": "npm-tool --bundle",
+    "publish": "npm-tool --publish",
+    "link": "npm-tool --link",
+    "link:sudo": "npm-tool --link --sudo",
+    "unlink": "npm-tool --unlink",
+    "unlink:sudo": "npm-tool --unlink --sudo",
+    "pack": "npm-tool --pack",
+    "typedoc": "typedoc",
+    "test": "mocha -r ts-node/register src/test/integration/*.test.ts --recursive --exit",
+    "test:active": "mocha -r ts-node/register src/test/integration/*.active.test.ts --recursive --exit --bail",
+    "test:unit": "mocha -r ts-node/register src/test/unit/*.test.ts --recursive --exit",
+    "test:active:unit": "mocha -r ts-node/register src/test/unit/*.active.test.ts --recursive --exit",
+    "lint": "eslint . --ext .ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bbanez/mem-store.git"
+  },
+  "keywords": [],
+  "author": "Branislav Vajagić",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bbanez/mem-store/issues"
+  },
+  "homepage": "https://github.com/bbanez/mem-store",
+  "devDependencies": {
+    "@banez/fs": "^1.0.3",
+    "@banez/npm-tool": "^1.1.1",
+    "@types/chai": "^4.3.3",
+    "@types/mocha": "^10.0.0",
+    "@types/node": "^15.6.2",
+    "@types/uuid": "^9.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
+    "chai": "^4.3.6",
+    "eslint": "^8.33.0",
+    "express": "^4.18.2",
+    "fs-extra": "^10.0.0",
+    "mocha": "^10.1.0",
+    "mongoose": "^6.9.1",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.2.1",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.1.2",
+    "typescript": "^4.9.5"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ],
+    "ext": "ts"
+  },
+  "dependencies": {
+    "uuid": "^9.0.0"
+  }
+}
