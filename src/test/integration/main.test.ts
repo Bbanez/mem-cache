@@ -10,6 +10,7 @@ const store = createMemStore<
   StoreItem,
   { findByName(name: string): StoreItem | null }
 >({
+  idKey: 'id',
   name: 'Test',
   methods({ state }) {
     return {

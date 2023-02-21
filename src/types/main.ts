@@ -1,24 +1,17 @@
 export type MemStoreQuery<Item> = (item: Item) => unknown;
 
-export interface MemStoreEntity {
-  id: string;
-}
-
-export interface MemStoreState<Entity extends MemStoreEntity> {
+export interface MemStoreState<Entity> {
   [id: string]: Entity;
 }
 
 export type MemStoreEventType = 'add' | 'update' | 'remove';
 
-export type MemStoreEventHandler<Entity extends MemStoreEntity> = (
+export type MemStoreEventHandler<Entity> = (
   type: MemStoreEventType,
   entity: Entity,
 ) => void;
 
-export type MemStoreMethodsFunction<
-  Entity extends MemStoreEntity = MemStoreEntity,
-  Methods = unknown,
-> = (data: {
+export type MemStoreMethodsFunction<Entity, Methods = unknown> = (data: {
   state: MemStoreState<Entity>;
   self: MemStore<Entity, unknown>;
   config: MemStoreConfig<Entity, Methods>;
@@ -27,7 +20,8 @@ export type MemStoreMethodsFunction<
 /**
  * Configuration object for the mem-cache handler.
  */
-export interface MemStoreConfig<Entity extends MemStoreEntity, Methods> {
+export interface MemStoreConfig<Entity, Methods> {
+  idKey: keyof Entity;
   /**
    * Name of the handler. Used for organizing logs and errors.
    */
@@ -43,7 +37,7 @@ export interface MemStoreConfig<Entity extends MemStoreEntity, Methods> {
   methods?: MemStoreMethodsFunction<Entity, Methods>;
 }
 
-export interface MemStore<Entity extends MemStoreEntity, Methods> {
+export interface MemStore<Entity, Methods> {
   /**
    * Returns a name of the handler.
    */

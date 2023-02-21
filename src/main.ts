@@ -2,16 +2,14 @@ import { v4 as uuidv4 } from 'uuid';
 import type {
   MemStore,
   MemStoreConfig,
-  MemStoreEntity,
   MemStoreEventHandler,
   MemStoreEventType,
   MemStoreState,
 } from './types';
 
-export function createMemStore<
-  Entity extends MemStoreEntity,
-  Methods = unknown,
->(config: MemStoreConfig<Entity, Methods>): MemStore<Entity, Methods> {
+export function createMemStore<Entity, Methods = unknown>(
+  config: MemStoreConfig<Entity, Methods>,
+): MemStore<Entity, Methods> {
   let state: MemStoreState<Entity> = {};
   const subscriptions: {
     [id: string]: MemStoreEventHandler<Entity>;
@@ -90,12 +88,12 @@ export function createMemStore<
       for (let i = 0; i < entities.length; i++) {
         const target = entities[i];
         if (!config.validation || config.validation(target, config, self)) {
-          const existing = state[target.id];
+          const existing = state[target[config.idKey] as string];
           if (existing) {
-            state[target.id] = target;
+            state[target[config.idKey] as string] = target;
             triggerEvent('update', target);
           } else {
-            state[target.id] = target;
+            state[target[config.idKey] as string] = target;
             triggerEvent('add', target);
           }
         }
